@@ -1,0 +1,3318 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rhisis.Network</name>
+    </assembly>
+    <members>
+        <member name="T:Rhisis.Network.Core.CoreAuthenticationResultType">
+            <summary>
+            Defines core server/client authentication result types.
+            </summary>
+        </member>
+        <member name="T:Rhisis.Network.Core.CorePacketType">
+            <summary>
+            Defines the core server/client packet types.
+            </summary>
+        </member>
+        <member name="T:Rhisis.Network.Core.ICoreClient">
+            <summary>
+            Defines a mechanism to connect to the core server.
+            </summary>
+        </member>
+        <member name="T:Rhisis.Network.Core.ServerType">
+            <summary>
+            Defines the server types.
+            </summary>
+        </member>
+        <member name="F:Rhisis.Network.Core.ServerType.Unknown">
+            <summary>
+            Unknown server type.
+            </summary>
+        </member>
+        <member name="F:Rhisis.Network.Core.ServerType.Cluster">
+            <summary>
+            Cluster Server.
+            </summary>
+        </member>
+        <member name="F:Rhisis.Network.Core.ServerType.World">
+            <summary>
+            World Server.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Core.ServerInfo.Id">
+            <summary>
+            Gets or sets the server's unique Id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Core.ServerInfo.Name">
+            <summary>
+            Gets or sets the server's name.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Core.ServerInfo.Host">
+            <summary>
+            Gets or sets the server's host name or IP address.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Core.ServerInfo.Port">
+            <summary>
+            Gets or sets the server's listening port.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Core.ServerInfo.#ctor(System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Creates and initializes a new <see cref="T:Rhisis.Network.Core.ServerInfo"/> instance.
+            </summary>
+            <param name="id">Server unique Id.</param>
+            <param name="name">Server name.</param>
+            <param name="host">Server host name or IP address.</param>
+            <param name="port">Server listening port.</param>
+        </member>
+        <member name="P:Rhisis.Network.Core.ClusterServerInfo.Worlds">
+            <summary>
+            Gets the list of all world servers of the current cluster.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Core.ClusterServerInfo.#ctor(System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Core.ClusterServerInfo"/> instance.
+            </summary>
+            <param name="id">Cluster server unique id.</param>
+            <param name="name">Cluster server name.</param>
+            <param name="host">Cluster server host name or IP address.</param>
+            <param name="port">Cluster server port.</param>
+        </member>
+        <member name="P:Rhisis.Network.Core.WorldServerInfo.ParentClusterId">
+            <summary>
+            Gets or sets the world server's parent cluster id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Core.WorldServerInfo.#ctor(System.Int32,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Core.WorldServerInfo"/> instance.
+            </summary>
+            <param name="id">World server unique id.</param>
+            <param name="name">World server name.</param>
+            <param name="host">World server host name or IP address.</param>
+            <param name="port">World server port.</param>
+            <param name="parentClusterId">World server parent cluster server id.</param>
+        </member>
+        <member name="T:Rhisis.Network.FFPacket">
+            <summary>
+            Represents a FlyFF packet.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.FFPacket.StringReadEncoding">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.FFPacket.StringWriteEncoding">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.FFPacket.Buffer">
+            <summary>
+            Gets the FFPacket buffer.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.#ctor">
+            <summary>
+            Creates a new FFPacket in write-only mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.#ctor(System.Object)">
+            <summary>
+            Creates a new FFPacket with a header.
+            </summary>
+            <param name="packetHeader"></param>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.#ctor(System.Byte[])">
+            <summary>
+            Creates a new FFPacket in read-only mode.
+            </summary>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.WriteHeader(System.Object)">
+            <summary>
+            Write packet header.
+            </summary>
+            <param name="packetHeader">FFPacket header</param>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.BuildPacketBuffer">
+            <summary>
+            Builds the packet buffer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.StartNewMergedPacket(System.UInt32,System.Object,System.UInt32)">
+            <summary>
+            Start a new merged packet.
+            </summary>
+            <param name="moverId"></param>
+            <param name="command"></param>
+            <param name="mainCommand"></param>
+        </member>
+        <member name="M:Rhisis.Network.FFPacket.StartNewMergedPacket(System.UInt32,System.Object)">
+            <summary>
+            Start a new merged packet.
+            </summary>
+            <param name="moverId"></param>
+            <param name="command"></param>
+        </member>
+        <member name="P:Rhisis.Network.FlyffPacketProcessor.HeaderSize">
+            <summary>
+            Gets the FlyFF packet header size.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.FlyffPacketProcessor.IncludeHeader">
+            <inheritdoc />
+        </member>
+        <member name="M:Rhisis.Network.FlyffPacketProcessor.GetMessageLength(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Rhisis.Network.FlyffPacketProcessor.CreatePacket(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.PacketHandlerAttribute.Header">
+            <summary>
+            Gets the packet attribute header.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.PacketHandlerAttribute.#ctor(System.Object)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.PacketHandlerAttribute"/> instance.
+            </summary>
+            <param name="header"></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.CommonPacketFactory">
+            <summary>
+            Packet Factory common to all servers.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.CommonPacketFactory.SendWelcome(Sylver.Network.Common.INetUser,System.UInt32)">
+            <summary>
+            Send a welcome packet to the client.
+            </summary>
+            <param name="client">Client</param>
+            <param name="sessionId">Session id</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.CommonPacketFactory.SendPong(Sylver.Network.Common.INetUser,System.Int32)">
+            <summary>
+            Send a pong response to the client.
+            </summary>
+            <param name="client">Client</param>
+            <param name="time">Current time</param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ActMsgPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ActMsgPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ActMsgPacket.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ActMsgPacket.Parameter1">
+            <summary>
+            Gets the first parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ActMsgPacket.Parameter2">
+            <summary>
+            Gets the second parameter.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ActMsgPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ActMsgPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ActMsgPacket.Equals(Rhisis.Network.Packets.World.ActMsgPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ActMsgPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ActMsgPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.AwakeningPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.AwakeningPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.AwakeningPacket.Item">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.AwakeningPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.AwakeningPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.AwakeningPacket.Equals(Rhisis.Network.Packets.World.AwakeningPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.AwakeningPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.AwakeningPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.OldPassword">
+            <summary>
+            Gets the old password.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.NewPassword">
+            <summary>
+            Gets the new password.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket.Equals(Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.ChangeBankPasswordPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket.Equals(Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.CloseBankWindowPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow.Equals(Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.CloseGuildBankWindow"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket.Equals(Rhisis.Network.Packets.World.Bank.ConfirmBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.ConfirmBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket.Slot">
+            <summary>
+            Gets the slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket.Gold">
+            <summary>
+            Gets the amount of gold.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket.Equals(Rhisis.Network.Packets.World.Bank.GetGoldBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.GetGoldBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.GetItemBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemBankPacket.Slot">
+            <summary>
+            Gets the slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemBankPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemBankPacket.ItemNumber">
+            <summary>
+            Gets the item number.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetItemBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetItemBankPacket.Equals(Rhisis.Network.Packets.World.Bank.GetItemBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket.Mode">
+            <summary>
+            Gets the mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket.Equals(Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.GetItemGuildBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket.Equals(Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.OpenBankWindowPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow.Equals(Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.OpenGuildBankWindow"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket.Slot">
+            <summary>
+            Gets the slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket.Gold">
+            <summary>
+            Gets the amount of gold.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket.Equals(Rhisis.Network.Packets.World.Bank.PutGoldBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.Flag">
+            <summary>
+            Gets the flag (always 0).
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.DestinationSlot">
+            <summary>
+            Gets the destination slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.SourceSlot">
+            <summary>
+            Gets the source slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.Gold">
+            <summary>
+            Gets the amount of gold.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket.Equals(Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.PutGoldBankToBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.PutItemBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankPacket.Slot">
+            <summary>
+            Gets the slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankPacket.ItemNumber">
+            <summary>
+            Gets the iten number.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemBankPacket.Equals(Rhisis.Network.Packets.World.Bank.PutItemBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.Flag">
+            <summary>
+            Gets the flag (always 1).
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.DestinationSlot">
+            <summary>
+            Gets the destination slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.SourceSlot">
+            <summary>
+            Gets the source slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.ItemNumber">
+            <summary>
+            Gets the item number.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket.Equals(Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemBankToBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket.Equals(Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Bank.PutItemGuildBankPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.BlessednessCancelPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.BlessednessCancelPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BlessednessCancelPacket.Item">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.BlessednessCancelPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.BlessednessCancelPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.BlessednessCancelPacket.Equals(Rhisis.Network.Packets.World.BlessednessCancelPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.BlessednessCancelPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.BlessednessCancelPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.BuyChipItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.BuyChipItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyChipItemPacket.Tab">
+            <summary>
+            Gets the tab.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyChipItemPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyChipItemPacket.Quantity">
+            <summary>
+            Gets the quantity.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyChipItemPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.BuyChipItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.BuyChipItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.BuyChipItemPacket.Equals(Rhisis.Network.Packets.World.BuyChipItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.BuyChipItemPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.BuyChipItemPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyItemPacket.Tab">
+            <summary>
+            Gets the tab.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyItemPacket.Slot">
+            <summary>
+            Gets the slot of the item.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyItemPacket.Quantity">
+            <summary>
+            Gets the quantity of items.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.BuyItemPacket.ItemId">
+            <summary>
+            Gets the Item Id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.BuyItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ChangeFacePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ChangeFacePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeFacePacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeFacePacket.FaceNumber">
+            <summary>
+            Gets the face number.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeFacePacket.Cost">
+            <summary>
+            Gets the cost.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeFacePacket.UseCoupon">
+            <summary>
+            Gets if a coupon will be used.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ChangeFacePacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ChangeJobPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ChangeJobPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeJobPacket.Job">
+            <summary>
+            Gets the job.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChangeJobPacket.Gama">
+            <summary>
+            I have no idea what gama is. Probably game?
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ChangeJobPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ChangeJobPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ChangeJobPacket.Equals(Rhisis.Network.Packets.World.ChangeJobPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ChangeJobPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ChangeJobPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ChatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ChatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ChatPacket.Message">
+            <summary>
+            Gets the chat message.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ChatPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.CloseShopWindowPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.CloseShopWindowPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.CloseShopWindowPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.CloseShopWindowPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.CloseShopWindowPacket.Equals(Rhisis.Network.Packets.World.CloseShopWindowPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.CloseShopWindowPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.CloseShopWindowPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.CorrReqPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.CorrReqPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.CorrReqPacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.CorrReqPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.CorrReqPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.CorrReqPacket.Equals(Rhisis.Network.Packets.World.CorrReqPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.CorrReqPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.CorrReqPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.ObjectId">
+            <summary>
+            Gets the dialog owner object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.Key">
+            <summary>
+            Gets the dialog key.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.Param">
+            <summary>
+            Gets the first parameter.
+            </summary>
+            <remarks>
+            Figure out what this value is.
+            </remarks>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.QuestId">
+            <summary>
+            Gets the dialog quest id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.MoverId">
+            <summary>
+            Gets the quest mover id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DialogPacket.PlayerId">
+            <summary>
+            Gets the quest player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DialogPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.DoUseItemPacket">
+            <summary>
+            Describes the packet structure of the <see cref="F:Rhisis.Network.Packets.PacketType.DOUSEITEM"/>.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemPacket.UniqueItemId">
+            <summary>
+            Gets or sets the Unique Item Id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemPacket.ObjectId">
+            <summary>
+            Gets or sets the object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemPacket.Part">
+            <summary>
+            Gets or sets the body part.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemPacket.FlightSpeed">
+            <summary>
+            Gets or sets the item flight speed.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DoUseItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.DoUseItemTargetPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.DoUseItemTargetPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemTargetPacket.Material">
+            <summary>
+            Gets the material.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DoUseItemTargetPacket.Target">
+            <summary>
+            Gets the target.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DoUseItemTargetPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.DoUseItemTargetPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DoUseItemTargetPacket.Equals(Rhisis.Network.Packets.World.DoUseItemTargetPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.DoUseItemTargetPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.DoUseItemTargetPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.DropGoldPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.DropGoldPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropGoldPacket.Gold">
+            <summary>
+            Gets the amount of gold.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropGoldPacket.Position">
+            <summary>
+            Gets the position.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DropGoldPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.DropGoldPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DropGoldPacket.Equals(Rhisis.Network.Packets.World.DropGoldPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.DropGoldPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.DropGoldPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.DropItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.DropItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropItemPacket.ItemType">
+            <summary>
+            Gets the item type
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropItemPacket.ItemUniqueId">
+            <summary>
+            Gets the unique item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropItemPacket.ItemQuantity">
+            <summary>
+            Gets the item quantity.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.DropItemPacket.Position">
+            <summary>
+            Gets the position.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.DropItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inhertidoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.DuelNoPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelNoPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelNoPacket.Equals(Rhisis.Network.Packets.World.Duel.DuelNoPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.DuelRequestPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.DuelRequestPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.DuelRequestPacket.SourcePlayerId">
+            <summary>
+            Gets the source player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.DuelRequestPacket.DestinationPlayerId">
+            <summary>
+            Gets the destination player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelRequestPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.DuelRequestPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelRequestPacket.Equals(Rhisis.Network.Packets.World.Duel.DuelRequestPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.DuelRequestPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.DuelRequestPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.DuelYesPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.DuelYesPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.DuelYesPacket.SourcePlayerId">
+            <summary>
+            Gets the source player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.DuelYesPacket.DestinationPlayerId">
+            <summary>
+            Gets the destination player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelYesPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.DuelYesPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.DuelYesPacket.Equals(Rhisis.Network.Packets.World.Duel.DuelYesPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.DuelYesPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.DuelYesPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.DuelNoPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket.Equals(Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelNoPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket.SourcePlayerId">
+            <summary>
+            Gets the source player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket.DestinationPlayerId">
+            <summary>
+            Gets the destination player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket.Equals(Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelRequestPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket.SourcePlayerId">
+            <summary>
+            Gets the source player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket.DestinationPlayerId">
+            <summary>
+            Gets the destination player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket.Equals(Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Duel.PartyDuelYesPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.EquipItemPacket.UniqueId">
+            <summary>
+            Gets the item unique id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.EquipItemPacket.Part">
+            <summary>
+            Gets the equip item destination part.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.EquipItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ErrorPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ErrorPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ErrorPacket.Code">
+            <summary>
+            Gets the code.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ErrorPacket.Data">
+            <summary>
+            Gets the data.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ErrorPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ErrorPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ErrorPacket.Equals(Rhisis.Network.Packets.World.ErrorPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ErrorPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ErrorPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ExpBoxInfoPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ExpBoxInfoPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ExpBoxInfoPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ExpBoxInfoPacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ExpBoxInfoPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ExpBoxInfoPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ExpBoxInfoPacket.Equals(Rhisis.Network.Packets.World.ExpBoxInfoPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ExpBoxInfoPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ExpBoxInfoPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ExperiencePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ExperiencePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ExperiencePacket.Experience">
+            <summary>
+            Gets the experience amount.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ExperiencePacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ExperiencePacket.Equals(Rhisis.Network.Packets.World.ExperiencePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ExperiencePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ExperiencePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.FocusObjectPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.FocusObjectPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.FocusObjectPacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.FocusObjectPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.FocusObjectPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.FocusObjectPacket.Equals(Rhisis.Network.Packets.World.FocusObjectPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.FocusObjectPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.FocusObjectPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GetClockPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GetClockPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GetClockPacket.SetBaseOfClient">
+            <summary>
+            Gets the SetBaseOfClient.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GetClockPacket.ClientTime">
+            <summary>
+            Gets the client time
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GetClockPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GetClockPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GetClockPacket.Equals(Rhisis.Network.Packets.World.GetClockPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GetClockPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GetClockPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetItemGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaGuildGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.GetPenyaPlayerGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket.GuildCombatType">
+            <summary>
+            Gets the guild combat type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket.Penya">
+            <summary>
+            Gets the guild combat gold amount.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.InGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.JoinGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.OutGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.PlayerPointGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.RequestStatusPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket.Map">
+            <summary>
+            Gets the map id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectMapGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.Window">
+            <summary>
+            Gets the window.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.DefenderId">
+            <summary>
+            Gets the defender id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.Size">
+            <summary>
+            Gets the SelectPlayer size.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.SelectPlayer">
+            <summary>
+            Gets the players to select.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.SelectPlayerGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket.Equals(Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.GuildCombat.TeleGuildCombatPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.IncJobLevelPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.IncJobLevelPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.IncJobLevelPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.IncJobLevelPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.IncJobLevelPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.IncJobLevelPacket.Equals(Rhisis.Network.Packets.World.IncJobLevelPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.IncJobLevelPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.IncJobLevelPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.IncStatLevelPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.IncStatLevelPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.IncStatLevelPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.IncStatLevelPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.IncStatLevelPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.IncStatLevelPacket.Equals(Rhisis.Network.Packets.World.IncStatLevelPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.IncStatLevelPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.IncStatLevelPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.JoinPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.JoinPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.WorldId">
+            <summary>
+            Gets the World Id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.PlayerId">
+            <summary>
+            Gets the Player Id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.AuthenticationKey">
+            <summary>
+            Gets the Authentication key.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.PartyId">
+            <summary>
+            Gets the player's party id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.GuildId">
+            <summary>
+            Gets the player's guild id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.GuildWarId">
+            <summary>
+            Gets the player's guild war id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.IdOfMulti">
+            <summary>
+            Gets the Id of multi
+            </summary>
+            <remarks>
+            What is this ?
+            </remarks>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.Slot">
+            <summary>
+            Gets the player's slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.PlayerName">
+            <summary>
+            Gets the player's name.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.Username">
+            <summary>
+            Gets the player's account username.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.Password">
+            <summary>
+            Gets the player's account password.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.MessengerState">
+            <summary>
+            Gets the messenger state.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.JoinPacket.MessengerCount">
+            <summary>
+            Gets the messenger count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.JoinPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.KeepAlivePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.KeepAlivePacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.KeepAlivePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.KeepAlivePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.KeepAlivePacket.Equals(Rhisis.Network.Packets.World.KeepAlivePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.KeepAlivePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.KeepAlivePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.LocalPosFromIAPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.LocalPosFromIAPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.LocalPosFromIAPacket.LocalPosition">
+            <summary>
+            Gets the local position.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.LocalPosFromIAPacket.IAId">
+            <summary>
+            Gets the id of the IA.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.LocalPosFromIAPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.LocalPosFromIAPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.LocalPosFromIAPacket.Equals(Rhisis.Network.Packets.World.LocalPosFromIAPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.LocalPosFromIAPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.LocalPosFromIAPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MagicAttackPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MagicAttackPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.AttackMessage">
+            <summary>
+            Gets the attack message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.ObjectId">
+            <summary>
+            Gets the target object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.Parameter2">
+            <summary>
+            Gets the second parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.Parameter3">
+            <summary>
+            Gets the third parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.MagicPower">
+            <summary>
+            Gets the magic power.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MagicAttackPacket.IdSfxHit">
+            <summary>
+            Gets the id of the hit SFX.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MagicAttackPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.MagicAttackPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MagicAttackPacket.Equals(Rhisis.Network.Packets.World.MagicAttackPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.MagicAttackPacket"/> instances.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket.MailId">
+            <summary>
+            Gets the id of the mail
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket.Equals(Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket"/> objects.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailGoldPacket"/></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket.MailId">
+            <summary>
+            Gets the id of the mail
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket.Equals(Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket"/> objects.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryGetMailItemPacket"/></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.ItemSlot">
+            <summary>
+            Gets the slot of the item.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.ItemQuantity">
+            <summary>
+            Gets the quantity of the item.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.Receiver">
+            <summary>
+            Gets the receiver's name.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.Gold">
+            <summary>
+            Gets the amount of gold.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.Title">
+            <summary>
+            Gets the title of the mail.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.Text">
+            <summary>
+            Gets the text of the mail.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket.Equals(Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket"/> objects.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryPostMailPacket"/></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket.MailId">
+            <summary>
+            Gets the id of the mail.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket.Equals(Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket"/> objects.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Mailbox.QueryRemoveMailPacket"/></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket.MailId">
+            <summary>
+            Gets the id of the mail
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket.Equals(Rhisis.Network.Packets.World.Mailbox.ReadMailPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket"/> objects.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Mailbox.ReadMailPacket"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MeleeAttack2Packet">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MeleeAttack2Packet"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttack2Packet.AttackMessage">
+            <summary>
+            Gets the attack message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttack2Packet.ObjectId">
+            <summary>
+            Gets the target object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttack2Packet.Parameter2">
+            <summary>
+            Gets the second parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttack2Packet.Parameter3">
+            <summary>
+            Gets the third parameter.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MeleeAttack2Packet.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.MeleeAttack2Packet"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MeleeAttack2Packet.Equals(Rhisis.Network.Packets.World.MeleeAttack2Packet)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.MeleeAttack2Packet"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.MeleeAttack2Packet"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MeleeAttackPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MeleeAttackPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttackPacket.AttackMessage">
+            <summary>
+            Gets the attack message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttackPacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttackPacket.UnknownParameter">
+            <summary>
+            Gets the unknown parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttackPacket.AttackFlags">
+            <summary>
+            Gets the attack flags.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MeleeAttackPacket.WeaponAttackSpeed">
+            <summary>
+            Gets the attack speed.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MeleeAttackPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ModifyStatusPacket.Strenght">
+            <summary>
+            Gets the strength.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ModifyStatusPacket.Stamina">
+            <summary>
+            Gets the stamina.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ModifyStatusPacket.Dexterity">
+            <summary>
+            Gets the dexterity.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ModifyStatusPacket.Intelligence">
+            <summary>
+            Gets the intelligence.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ModifyStatusPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MoveBankItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MoveBankItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoveBankItemPacket.SourceIndex">
+            <summary>
+            Gets the source index.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoveBankItemPacket.Destinationindex">
+            <summary>
+            Gets the destination index.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MoveBankItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.MoveBankItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MoveBankItemPacket.Equals(Rhisis.Network.Packets.World.MoveBankItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.MoveBankItemPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.MoveBankItemPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MoveItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MoveItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoveItemPacket.ItemType">
+            <summary>
+            Gets the Item type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoveItemPacket.SourceSlot">
+            <summary>
+            Gets the Item source slot.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoveItemPacket.DestinationSlot">
+            <summary>
+            Gets the item destination slot.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MoveItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.MoverFocusPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.MoverFocusPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.MoverFocusPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MoverFocusPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.MoverFocusPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.MoverFocusPacket.Equals(Rhisis.Network.Packets.World.MoverFocusPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.MoverFocusPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.MoverFocusPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.OpenShopWindowPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.OpenShopWindowPacket"/> packet structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.OpenShopWindowPacket.ObjectId">
+            <summary>
+            Gets the selected object id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.OpenShopWindowPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.LeaderId">
+            <summary>
+            Gets the leader id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.LeaderLevel">
+            <summary>
+            Gets the leader level.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.LeaderJob">
+            <summary>
+            Gets the leader job.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.LeaderSex">
+            <summary>
+            Gets the leader sex.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.MemberId">
+            <summary>
+            Gets the member id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.MemberLevel">
+            <summary>
+            Gets the member level.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.MemberJob">
+            <summary>
+            Gets the member job.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.MemberSex">
+            <summary>
+            Gets the member sex.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket.Equals(Rhisis.Network.Packets.World.Party.PartyAddMemberPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyAddMemberPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket.ExperienceMode">
+            <summary>
+            Gets the experience mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket.Equals(Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeExperienceModePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket.ItemMode">
+            <summary>
+            Gets the item mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket.Equals(Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeItemModePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket.SendName">
+            <summary>
+            Gets if a name was sent.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket.Equals(Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyChangeTroupPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket.LeaderId">
+            <summary>
+            Gets the leader id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket.MemberId">
+            <summary>
+            Gets the member id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket.Mode">
+            <summary>
+            Gets the mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket.Equals(Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestCancelPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket.MemberId">
+            <summary>
+            Gets the member id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket.Troup">
+            <summary>
+            Gets if it's a troup.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket.Equals(Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyMemberRequestPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket.Equals(Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartyRemoveMemberPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Party.PartySkillUsePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Party.PartySkillUsePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartySkillUsePacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Party.PartySkillUsePacket.SkillId">
+            <summary>
+            Gets the skill id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartySkillUsePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Party.PartySkillUsePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Party.PartySkillUsePacket.Equals(Rhisis.Network.Packets.World.Party.PartySkillUsePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Party.PartySkillUsePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Party.PartySkillUsePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket.LeaderId">
+            <summary>
+            Gets the leader id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket.NewLeaderId">
+            <summary>
+            Gets the new leader id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket.Equals(Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeLeaderPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket.Equals(Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Packet.PartyChangeNamePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerAnglePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerAnglePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerAnglePacket.Angle">
+            <summary>
+            Gets the Angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerAnglePacket.AngleX">
+            <summary>
+            Gets the X angle.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerAnglePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.PlayerAnglePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerAnglePacket.Equals(Rhisis.Network.Packets.World.PlayerAnglePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.PlayerAnglePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.PlayerAnglePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerBehavior2Packet">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerBehavior2Packet"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.BeginPosition">
+            <summary>
+            Gets the BeginPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.DestinationPosition">
+            <summary>
+            Gets the DestinationPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.Angle">
+            <summary>
+            Gets the Angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.AngleX">
+            <summary>
+            Gets the X angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.AccPower">
+            <summary>
+            Gets the power.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.TurnAngle">
+            <summary>
+            Gets the turn angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.State">
+            <summary>
+            Gets the state.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.StateFlag">
+            <summary>
+            Gets the state flag.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.Motion">
+            <summary>
+            Gets the motion.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.MotionEx">
+            <summary>
+            Gets the motion ex.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.Loop">
+            <summary>
+            Gets the loop.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.MotionOption">
+            <summary>
+            Gets the motion option.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehavior2Packet.TickCount">
+            <summary>
+            Gets the tick count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerBehavior2Packet.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.PlayerBehavior2Packet"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerBehavior2Packet.Equals(Rhisis.Network.Packets.World.PlayerBehavior2Packet)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.PlayerBehavior2Packet"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.PlayerBehavior2Packet"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerBehaviorPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerBehaviorPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.BeginPosition">
+            <summary>
+            Gets the BeginPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.DestinationPosition">
+            <summary>
+            Gets the DestinationPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.Angle">
+            <summary>
+            Gets the Angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.State">
+            <summary>
+            Gets the state.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.StateFlag">
+            <summary>
+            Gets the state flag.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.Motion">
+            <summary>
+            Gets the motion.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.MotionEx">
+            <summary>
+            Gets the motion ex.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.Loop">
+            <summary>
+            Gets the loop.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.MotionOption">
+            <summary>
+            Gets the motion option.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerBehaviorPacket.TickCount">
+            <summary>
+            Gets the tick count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerBehaviorPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerDestObjectPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerDestObjectPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerDestObjectPacket.TargetObjectId">
+            <summary>
+            Gets the target object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerDestObjectPacket.Distance">
+            <summary>
+            Gets the distance to the target.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerDestObjectPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerMoved2Packet">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerMoved2Packet"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.BeginPosition">
+            <summary>
+            Gets the BeginPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.DestinationPosition">
+            <summary>
+            Gets the DestinationPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.Angle">
+            <summary>
+            Gets the Angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.AngleX">
+            <summary>
+            Gets the X angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.AccPower">
+            <summary>
+            Gets the power.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.TurnAngle">
+            <summary>
+            Gets the turn angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.State">
+            <summary>
+            Gets the state.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.StateFlag">
+            <summary>
+            Gets the state flag.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.Motion">
+            <summary>
+            Gets the motion.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.MotionEx">
+            <summary>
+            Gets the motion ex.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.Loop">
+            <summary>
+            Gets the loop.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.MotionOption">
+            <summary>
+            Gets the motion option.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMoved2Packet.TickCount">
+            <summary>
+            Gets the tick count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerMoved2Packet.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.PlayerMoved2Packet"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerMoved2Packet.Equals(Rhisis.Network.Packets.World.PlayerMoved2Packet)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.PlayerMoved2Packet"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.PlayerMoved2Packet"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.PlayerMovedPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.PlayerMovedPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.BeginPosition">
+            <summary>
+            Gets the BeginPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.DestinationPosition">
+            <summary>
+            Gets the DestinationPosition.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.Angle">
+            <summary>
+            Gets the Angle.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.State">
+            <summary>
+            Gets the object state (MovingFlag).
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.StateFlag">
+            <summary>
+            Gets the state flag. (Motion flag)
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.Motion">
+            <summary>
+            Gets the motion.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.MotionEx">
+            <summary>
+            Gets the motion ex.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.Loop">
+            <summary>
+            Gets the loop.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.MotionOption">
+            <summary>
+            Gets the motion option.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.PlayerMovedPacket.TickCount">
+            <summary>
+            Gets the tick count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.PlayerMovedPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.QueryPlayerData2Packet">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.QueryPlayerData2Packet"/> packet structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.QueryPlayerData2Packet.Size">
+            <summary>
+            Gets the size of the list.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.QueryPlayerData2Packet.PlayerDictionary">
+            <summary>
+            Gets the player id and version.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.QueryPlayerData2Packet.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.QueryPlayerData2Packet"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.QueryPlayerData2Packet.Equals(Rhisis.Network.Packets.World.QueryPlayerData2Packet)">
+            <summary>
+            Compare two <see cref="T:Rhisis.Network.Packets.World.QueryPlayerData2Packet"/> instances.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.QueryPlayerDataPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.QueryPlayerDataPacket"/> packet structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.QueryPlayerDataPacket.PlayerId">
+            <summary>
+            Gets the player id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.QueryPlayerDataPacket.Version">
+            <summary>
+            Gets the version.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.QueryPlayerDataPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.QueryPlayerDataPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.QueryPlayerDataPacket.Equals(Rhisis.Network.Packets.World.QueryPlayerDataPacket)">
+            <summary>
+            Compare two <see cref="T:Rhisis.Network.Packets.World.QueryPlayerDataPacket"/> instances.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.RangeAttackPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.RangeAttackPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RangeAttackPacket.AttackMessage">
+            <summary>
+            Gets the attack message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RangeAttackPacket.ObjectId">
+            <summary>
+            Gets the object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RangeAttackPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RangeAttackPacket.IdSfxHit">
+            <summary>
+            Gets the id of the hit SFX.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.RangeAttackPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.RangeAttackPacket"/> instance.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.RangeAttackPacket.Equals(Rhisis.Network.Packets.World.RangeAttackPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.RangeAttackPacket"/> instances.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.RemoveInventoryItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.RemoveInventoryItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RemoveInventoryItemPacket.ItemUniqueId">
+            <summary>
+            Gets the unique item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RemoveInventoryItemPacket.ItemQuantity">
+            <summary>
+            Gets the item quantity.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.RemoveInventoryItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.RemoveInventoryItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket.Equals(Rhisis.Network.Packets.World.RemoveItemLevelDownPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.RemoveItemLevelDownPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptAddExperiencePacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptAddExperiencePacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptAddExperiencePacket.Experience">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptAddExperiencePacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptAddExperiencePacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptAddExperiencePacket.Equals(Rhisis.Network.Packets.World.ScriptAddExperiencePacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptAddExperiencePacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptAddExperiencePacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptAddGoldPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptAddGoldPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptAddGoldPacket.Gold">
+            <summary>
+            Gets the gold.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptAddGoldPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptAddGoldPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptAddGoldPacket.Equals(Rhisis.Network.Packets.World.ScriptAddGoldPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptAddGoldPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptAddGoldPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptCreateItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptCreateItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptCreateItemPacket.ItemType">
+            <summary>
+            Gets the item type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptCreateItemPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptCreateItemPacket.Quantity">
+            <summary>
+            Gets the quantity.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptCreateItemPacket.Option">
+            <summary>
+            Gets the option.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptCreateItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptCreateItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptCreateItemPacket.Equals(Rhisis.Network.Packets.World.ScriptCreateItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptCreateItemPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptCreateItemPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptEquipItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptEquipItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptEquipItemPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptEquipItemPacket.Option">
+            <summary>
+            Gets the option.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptEquipItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptEquipItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptEquipItemPacket.Equals(Rhisis.Network.Packets.World.ScriptEquipItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptEquipItemPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptEquipItemPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket.ItemId">
+            <summary>
+            Gets the item id.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket.Equals(Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveAllItemPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket.QuestId">
+            <summary>
+            Gets the gold.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket.Equals(Rhisis.Network.Packets.World.ScriptRemoveQuestPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ScriptRemoveQuestPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SellItemPacket.ItemUniqueId">
+            <summary>
+            Gets the item's unique id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SellItemPacket.Quantity">
+            <summary>
+            Gets the item quantity to sell.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SellItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.SetDestPositionPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.SetDestPositionPacket"/> packet structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetDestPositionPacket.X">
+            <summary>
+            Gets the X coordinate.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetDestPositionPacket.Y">
+            <summary>
+            Gets the Y coordinate.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetDestPositionPacket.Z">
+            <summary>
+            Gets the Z coordinate.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetDestPositionPacket.Forward">
+            <summary>
+            Gets the forward state.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SetDestPositionPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.SetHairPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.SetHairPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetHairPacket.HairId">
+            <summary>
+            Gets the hair id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetHairPacket.R">
+            <summary>
+            Gets the red color.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetHairPacket.G">
+            <summary>
+            Gets the green color.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetHairPacket.B">
+            <summary>
+            Gets the blue color.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetHairPacket.UseCoupon">
+            <summary>
+            Gets if a coupon will be used.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SetHairPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.SetQuestPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.SetQuestPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetQuestPacket.QuestId">
+            <summary>
+            Gets the quest id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetQuestPacket.State">
+            <summary>
+            Gets the state.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SetQuestPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.SetQuestPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SetQuestPacket.Equals(Rhisis.Network.Packets.World.SetQuestPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.SetQuestPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.SetQuestPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.SetTargetPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.SetTargetPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetTargetPacket.TargetId">
+            <summary>
+            Gets the target id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SetTargetPacket.TargetMode">
+            <summary>
+            Gets a value indicating whether target should be cleared or not.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SetTargetPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.SfxIdPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SfxIdPacket.Target">
+            <summary>
+            Gets the target id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SfxIdPacket.IdSfxHit">
+            <summary>
+            Gets the id of the hit SFX.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SfxIdPacket.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SfxIdPacket.Skill">
+            <summary>
+            Gets the skill.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.SfxIdPacket.MaxDamageCount">
+            <summary>
+            Gets the max damage count.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SfxIdPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.SfxIdPacket.Equals(Rhisis.Network.Packets.World.SfxIdPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/></param>
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.ShipActMsgPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.ShipActMsgPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ShipActMsgPacket.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ShipActMsgPacket.Parameter1">
+            <summary>
+            Gets the first parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ShipActMsgPacket.Parameter2">
+            <summary>
+            Gets the second parameter.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.ShipActMsgPacket.Ship">
+            <summary>
+            Gets the ship.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ShipActMsgPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.ShipActMsgPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.ShipActMsgPacket.Equals(Rhisis.Network.Packets.World.ShipActMsgPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.ShipActMsgPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.ShipActMsgPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.StateModePacket.StateMode">
+            <summary>
+            Gets the client state mode.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.StateModePacket.Flag">
+            <summary>
+            Gets the client state mode flag.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.StateModePacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.TagPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.TagPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.TagPacket.TargetId">
+            <summary>
+            Gets the target id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.TagPacket.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.TagPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.TagPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.TagPacket.Equals(Rhisis.Network.Packets.World.TagPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.TagPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.TagPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.SlotIndex">
+            <summary>
+            Gets the taskbar slot index.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.Type">
+            <summary>
+            Gets the taskbar shortcut type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.ObjectId">
+            <summary>
+            Gets the taskbar object id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.ObjectType">
+            <summary>
+            Gets the taskbar shortcut object type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.ObjectIndex">
+            <summary>
+            Gets the taskbar object index.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.UserId">
+            <summary>
+            Gets the user id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.ObjectData">
+            <summary>
+            Gets the taskbar object data.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.Text">
+            <summary>
+            Gets the taskbar text object.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Taskbar.AddTaskbarAppletPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.AddTaskbarItemPacket.SlotLevelIndex">
+            <summary>
+            Gets the slot level index.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Taskbar.AddTaskbarItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.RemoveTaskbarAppletPacket.SlotIndex">
+            <summary>
+            Gets the slot index from the applet taskbar to be removed.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Taskbar.RemoveTaskbarAppletPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Taskbar.RemoveTaskbarItemPacket.SlotLevelIndex">
+            <summary>
+             Gets the slot level index from the item taskbar to be removed.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Taskbar.RemoveTaskbarItemPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.TeleSkillPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.TeleSkillPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.TeleSkillPacket.Position">
+            <summary>
+            Gets the position
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.TeleSkillPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.TeleSkillPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.TeleSkillPacket.Equals(Rhisis.Network.Packets.World.TeleSkillPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.TeleSkillPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.TeleSkillPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradeCancelPacket.Mode">
+            <summary>
+            Gets the trade cancel mode.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradeCancelPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.Trade.TradePullPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.Trade.TradePullPacket"/> structure.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePullPacket.Slot">
+            <summary>
+            Gets the slot.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradePullPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.Trade.TradePullPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradePullPacket.Equals(Rhisis.Network.Packets.World.Trade.TradePullPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.Trade.TradePullPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.Trade.TradePullPacket"/></param>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePutGoldPacket.Gold">
+            <summary>
+            Gets the amount of gold the player has placed in the trade.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradePutGoldPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePutPacket.Position">
+            <summary>
+            Gets the target position slot in the trade container.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePutPacket.ItemType">
+            <summary>
+            Gets the item type.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePutPacket.ItemUniqueId">
+            <summary>
+            Gets the item unique id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradePutPacket.Count">
+            <summary>
+            Gets the amount of items to put into the trade.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradePutPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.Trade.TradeRequestPacket.TargetId">
+            <summary>
+            Gets the target object id for trade.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.Trade.TradeRequestPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Rhisis.Network.Packets.World.UseSkillPacket">
+            <summary>
+            Defines the <see cref="T:Rhisis.Network.Packets.World.UseSkillPacket"/> structure.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.UseSkillPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
+            <summary>
+            Creates a new <see cref="T:Rhisis.Network.Packets.World.UseSkillPacket"/> object.
+            </summary>
+            <param name="packet">Incoming packet</param>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.UseSkillPacket.Equals(Rhisis.Network.Packets.World.UseSkillPacket)">
+            <summary>
+            Compares two <see cref="T:Rhisis.Network.Packets.World.UseSkillPacket"/>.
+            </summary>
+            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.UseSkillPacket"/></param>
+        </member>
+    </members>
+</doc>
