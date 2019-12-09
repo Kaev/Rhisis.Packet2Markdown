@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 
@@ -11,7 +10,6 @@ namespace Rhisis.Packet2Markdown
 {
     class Program
     {
-
         private static readonly Dictionary<Type, string> Aliases = new Dictionary<Type, string>()
         {
             { typeof(byte), "byte" },
@@ -47,9 +45,10 @@ namespace Rhisis.Packet2Markdown
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Generating packets...");
-
+            Console.WriteLine("Loading Assembly Rhisis.Network...");
             var asm = Assembly.Load("Rhisis.Network");
+
+            Console.WriteLine("Getting all types in Namespace Rhisis.Network.Packets.(Login/Cluster/World)...");
             var packets = asm.GetTypes().Where(t =>  t.Namespace != null && 
                                                     (t.Namespace.StartsWith("Rhisis.Network.Packets.Login") ||
                                                      t.Namespace.StartsWith("Rhisis.Network.Packets.Cluster") ||
@@ -57,25 +56,33 @@ namespace Rhisis.Packet2Markdown
                                                );
 
             // Write server overview pages
+            Console.WriteLine("Starting overview page generation...");
             var loginPackets = asm.GetTypes().Where(t =>
-                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.Login"));
+                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.Login")).OrderBy(t => t.Name);
             var clusterPackets = asm.GetTypes().Where(t =>
-                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.Cluster"));
+                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.Cluster")).OrderBy(t => t.Name);
             var worldPackets = asm.GetTypes().Where(t =>
-                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.World"));
+                t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.World")).OrderBy(t => t.Name);
+
+            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.Login.*...");
             GenerateOverviewPage(loginPackets);
+            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.Cluster.*...");
             GenerateOverviewPage(clusterPackets);
+            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.World.*...");
             GenerateOverviewPage(worldPackets);
+            Console.WriteLine("Finished overview page generation.");
 
             // Write all packet pages
-            var sr = new StreamReader("Rhisis.Network.xml");
+            Console.WriteLine("Loading Rhisis.Network.xml");
             var xml = new XmlDocument();
-            xml.Load(sr);
-            sr.Close();
-            foreach (var packet in packets)
-                PacketClassToMarkupPage(packet, xml);
+            using (var sr = new StreamReader("Rhisis.Network.xml"))
+                xml.Load(sr);
 
-            Console.WriteLine("Generated all found packets.");
+            Console.WriteLine("Generating pages for found packet classes...");
+            foreach (var packet in packets)
+                PacketClassToMarkdownPage(packet, xml);
+
+            Console.WriteLine("Finished page generation!");
         }
 
         private static void GenerateOverviewPage(IEnumerable<Type> packets)
@@ -84,11 +91,10 @@ namespace Rhisis.Packet2Markdown
 
             var server = packets.First().Namespace.Split(".").Skip(3).Take(1).First();
 
-            sb.AppendLine($"[[Packets|Packets]] / [[{server}|{server}]]");
-
+            sb.AppendLine($"[Packets](Packets) / [{server}]({server})");
             sb.AppendLine("## Overview");
             foreach (var packet in packets)
-                sb.AppendLine($"[[{packet.Name}|{packet.Name}]]{Environment.NewLine}");
+                sb.AppendLine($"[{packet.Name}]({packet.Name}){Environment.NewLine}");
 
             var packetPath = "Packets";
             if (!Directory.Exists(packetPath))
@@ -98,7 +104,7 @@ namespace Rhisis.Packet2Markdown
                 sw.Write(sb.ToString());
         }
 
-        private static void PacketClassToMarkupPage(Type type, XmlDocument xml)
+        private static void PacketClassToMarkdownPage(Type type, XmlDocument xml)
         {
             var sb = new StringBuilder();
 
@@ -114,7 +120,7 @@ namespace Rhisis.Packet2Markdown
             if (!Directory.Exists(serverPath))
                 Directory.CreateDirectory(serverPath);
 
-            sb.AppendLine($"[[Packets|Packets]] / [[{server}|{server}]] / [[{className}|{className}]]");
+            sb.AppendLine($"[Packets](Packets) / [{server}]({server}) / [{className}]({className})");
             sb.AppendLine($"## Packet Structure");
             sb.AppendLine("Type | Name | Summary");
             sb.AppendLine("--- | --- | ---");
@@ -132,7 +138,6 @@ namespace Rhisis.Packet2Markdown
             var propertySummary = xml["doc"]["members"].SelectSingleNode("member[@name='P:" + $"{property.DeclaringType.FullName}.{property.Name}" + "']")?.SelectSingleNode("summary").InnerText.Trim();
             if (propertySummary is null)
                 propertySummary = "(Empty)";
-
             return $"{GetPropertyBaseTypeString(property.PropertyType)} | {property.Name} | {propertySummary}";
         }
 
@@ -157,13 +162,12 @@ namespace Rhisis.Packet2Markdown
                     if (argument != genericArguments.Last())
                         genericTypes.Append(", ");
                 }
-
                 return $"{propertyType.Name}<{genericTypes}>";
             }
 
             if (propertyType.IsClass)
             {
-                // Class Vector3 has two calculated properties that are not part of the packet structure
+                // Edge case: Class Vector3 has two calculated properties that are not part of the packet structure
                 if (propertyType.Name.Equals("Vector3"))
                     return $"{propertyType.Name}<float, float, float>";
 
@@ -175,10 +179,8 @@ namespace Rhisis.Packet2Markdown
                     if (property != classProperties.Last())
                         propertyTypes.Append(", ");
                 }
-
                 return $"{propertyType.Name}<{propertyTypes}>";
             }
-
             return propertyType.Name;
         }
     }
