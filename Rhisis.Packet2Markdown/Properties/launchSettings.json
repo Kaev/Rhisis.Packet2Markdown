@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Rhisis.Packet2Markdown": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\wegdamit\\Rhisis\\src\\Rhisis.Network\\bin\\Debug\\netstandard2.1\\Rhisis.Network.dll\" \"C:\\wegdamit\\Rhisis\\src\\Rhisis.Network\\bin\\Debug\\netstandard2.1\\Rhisis.Network.xml\""
+    }
+  }
+}

@@ -45,8 +45,19 @@ namespace Rhisis.Packet2Markdown
 
         static void Main(string[] args)
         {
+            if (args.Length < 1)
+                throw new ArgumentNullException($"Please enter the following arguments: {Environment.NewLine}" +
+                                                         "[0] Path to Rhisis.Network assembly file." +
+                                                         "[1] Path tho Rhisis.Network.xml (generated Visual Studio documentation file)");
+
+            if (!File.Exists(args[0]))
+                throw new FileNotFoundException("Couldn't find Rhisis.Network assembly file.");
+
+            if (!File.Exists(args[1]))
+                throw new FileNotFoundException("Couldn't find Rhisis.Network.xml.'");
+
             Console.WriteLine("Loading Assembly Rhisis.Network...");
-            var asm = Assembly.Load("Rhisis.Network");
+            var asm = Assembly.LoadFile(args[0]);
 
             Console.WriteLine("Getting all types in Namespace Rhisis.Network.Packets.(Login/Cluster/World)...");
             var loginPackets = asm.GetTypes().Where(t =>
@@ -57,14 +68,14 @@ namespace Rhisis.Packet2Markdown
                 t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.World")).OrderBy(t => t.Name);
 
             Console.WriteLine("Generating pages...");
-            GeneratePage(loginPackets);
-            GeneratePage(clusterPackets);
-            GeneratePage(worldPackets);
+            GeneratePage(loginPackets, args[1]);
+            GeneratePage(clusterPackets, args[1]);
+            GeneratePage(worldPackets, args[1]);
 
             Console.WriteLine("Finished page generation!");
         }
 
-        private static void GeneratePage(IEnumerable<Type> packets)
+        private static void GeneratePage(IEnumerable<Type> packets, string xmlPath)
         {
             var pageBase = File.ReadAllText(@"PageTemplate.txt");
             var packetBase = File.ReadAllText(@"PacketTemplate.txt");
@@ -76,7 +87,7 @@ namespace Rhisis.Packet2Markdown
             var packetOverview = new StringBuilder();
 
             var xml = new XmlDocument();
-            using (var sr = new StreamReader("Rhisis.Network.xml"))
+            using (var sr = new StreamReader(xmlPath))
                 xml.Load(sr);
 
             foreach (var packet in packets)
