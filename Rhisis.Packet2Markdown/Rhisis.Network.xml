@@ -2668,6 +2668,19 @@
             <param name="other"></param>
             <returns></returns>
         </member>
+        <member name="P:Rhisis.Network.Packets.World.QuestCheckPacket.QuestId">
+            <summary>
+            Gets the quest id.
+            </summary>
+        </member>
+        <member name="P:Rhisis.Network.Packets.World.QuestCheckPacket.Checked">
+            <summary>
+            Gets the quest checked state.
+            </summary>
+        </member>
+        <member name="M:Rhisis.Network.Packets.World.QuestCheckPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
+        </member>
         <member name="T:Rhisis.Network.Packets.World.RangeAttackPacket">
             <summary>
             Defines the <see cref="T:Rhisis.Network.Packets.World.RangeAttackPacket"/> structure.
@@ -3050,17 +3063,8 @@
             Gets the max damage count.
             </summary>
         </member>
-        <member name="M:Rhisis.Network.Packets.World.SfxIdPacket.#ctor(Sylver.Network.Data.INetPacketStream)">
-            <summary>
-            Creates a new <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/> object.
-            </summary>
-            <param name="packet">Incoming packet</param>
-        </member>
-        <member name="M:Rhisis.Network.Packets.World.SfxIdPacket.Equals(Rhisis.Network.Packets.World.SfxIdPacket)">
-            <summary>
-            Compares two <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/>.
-            </summary>
-            <param name="other">Other <see cref="T:Rhisis.Network.Packets.World.SfxIdPacket"/></param>
+        <member name="M:Rhisis.Network.Packets.World.SfxIdPacket.Deserialize(Sylver.Network.Data.INetPacketStream)">
+            <inheritdoc />
         </member>
         <member name="T:Rhisis.Network.Packets.World.ShipActMsgPacket">
             <summary>
