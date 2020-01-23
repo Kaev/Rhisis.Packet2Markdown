@@ -1,0 +1,8 @@
+﻿# {ServerName} packets
+
+| Packet id | Description |
+| --------- | ----------- |
+{PacketOverviewContent}
+
+---
+{PacketContent}

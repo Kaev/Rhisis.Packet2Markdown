@@ -49,14 +49,6 @@ namespace Rhisis.Packet2Markdown
             var asm = Assembly.Load("Rhisis.Network");
 
             Console.WriteLine("Getting all types in Namespace Rhisis.Network.Packets.(Login/Cluster/World)...");
-            var packets = asm.GetTypes().Where(t =>  t.Namespace != null && 
-                                                    (t.Namespace.StartsWith("Rhisis.Network.Packets.Login") ||
-                                                     t.Namespace.StartsWith("Rhisis.Network.Packets.Cluster") ||
-                                                     t.Namespace.StartsWith("Rhisis.Network.Packets.World"))
-                                               );
-
-            // Write server overview pages
-            Console.WriteLine("Starting overview page generation...");
             var loginPackets = asm.GetTypes().Where(t =>
                 t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.Login")).OrderBy(t => t.Name);
             var clusterPackets = asm.GetTypes().Where(t =>
@@ -64,81 +56,110 @@ namespace Rhisis.Packet2Markdown
             var worldPackets = asm.GetTypes().Where(t =>
                 t.Namespace != null && t.Namespace.StartsWith("Rhisis.Network.Packets.World")).OrderBy(t => t.Name);
 
-            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.Login.*...");
-            GenerateOverviewPage(loginPackets);
-            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.Cluster.*...");
-            GenerateOverviewPage(clusterPackets);
-            Console.WriteLine("Generating overview page for Rhisis.Network.Packets.World.*...");
-            GenerateOverviewPage(worldPackets);
-            Console.WriteLine("Finished overview page generation.");
-
-            // Write all packet pages
-            Console.WriteLine("Loading Rhisis.Network.xml");
-            var xml = new XmlDocument();
-            using (var sr = new StreamReader("Rhisis.Network.xml"))
-                xml.Load(sr);
-
-            Console.WriteLine("Generating pages for found packet classes...");
-            foreach (var packet in packets)
-                PacketClassToMarkdownPage(packet, xml);
+            Console.WriteLine("Generating pages...");
+            GeneratePage(loginPackets);
+            GeneratePage(clusterPackets);
+            GeneratePage(worldPackets);
 
             Console.WriteLine("Finished page generation!");
         }
 
-        private static void GenerateOverviewPage(IEnumerable<Type> packets)
+        private static void GeneratePage(IEnumerable<Type> packets)
         {
-            var sb = new StringBuilder();
+            var pageBase = File.ReadAllText(@"PageTemplate.txt");
+            var packetBase = File.ReadAllText(@"PacketTemplate.txt");
 
             var server = packets.First().Namespace.Split(".").Skip(3).Take(1).First();
 
-            sb.AppendLine($"[Packets](Packets) / [{server}]({server})");
-            sb.AppendLine("## Overview");
+            var page = pageBase.Replace("{ServerName}", server);
+
+            var packetOverview = new StringBuilder();
+
+            var xml = new XmlDocument();
+            using (var sr = new StreamReader("Rhisis.Network.xml"))
+                xml.Load(sr);
+
             foreach (var packet in packets)
-                sb.AppendLine($"[{packet.Name}]({packet.Name}){Environment.NewLine}");
+                packetOverview.AppendLine(GetPacketTableRowText(xml, packet));
 
-            var packetPath = "Packets";
-            if (!Directory.Exists(packetPath))
-                Directory.CreateDirectory(packetPath);
+            page = page.Replace("{PacketOverviewContent}", packetOverview.ToString());
 
-            using (var sw = new StreamWriter($"{packetPath}/{server}.md"))
-                sw.Write(sb.ToString());
+            var packetContent = new StringBuilder();
+
+            foreach (var packet in packets)
+                packetContent.AppendLine(GetPacketDocumentation(xml, packet, packetBase));
+
+            page = page.Replace("{PacketContent}", packetContent.ToString());
+
+            using (var sw = new StreamWriter($"{server}.md"))
+                sw.Write(page);
         }
 
-        private static void PacketClassToMarkdownPage(Type type, XmlDocument xml)
+        private static string GetClassSummary(XmlDocument xml, Type packet)
         {
-            var sb = new StringBuilder();
+            var classSummary = xml["doc"]["members"].SelectSingleNode("member[@name='T:" + $"{packet.FullName}" + "']")?.SelectSingleNode("summary").InnerXml.Trim();
+            if (classSummary is null)
+                classSummary = "(Empty)";
+            else
+            {
+                var tempXml = new XmlDocument();
+                tempXml.LoadXml($"<root>{classSummary}</root>");
+                var tempSummary = new StringBuilder();
+                foreach (XmlNode node in tempXml.ChildNodes)
+                {
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        var innerText = childNode.InnerText;
+                        if (!string.IsNullOrEmpty(innerText))
+                            tempSummary.Append(innerText);
+                        else
+                        {
+                            var attributes = childNode.Attributes;
+                            if (attributes.Count >= 1)
+                            {
+                                var attributeValue = attributes[0].Value;
+                                if (!string.IsNullOrWhiteSpace(attributeValue))
+                                {
+                                    var className = attributeValue.Split('.').LastOrDefault();
+                                    if (className != null)
+                                        tempSummary.Append(className);
+                                }
+                            }
+                        }
+                    }
+                }
+                classSummary = tempSummary.ToString();
+            }
 
-            // Prepare meta informations
-            var server = type.Namespace.Split(".").Skip(3).Take(1).First();
-            var className = type.Name;
-
-            // Create directories
-            var packetPath = "Packets";
-            var serverPath = $"{packetPath}/{server}";
-            if (!Directory.Exists(packetPath))
-                Directory.CreateDirectory(packetPath);
-            if (!Directory.Exists(serverPath))
-                Directory.CreateDirectory(serverPath);
-
-            sb.AppendLine($"[Packets](Packets) / [{server}]({server}) / [{className}]({className})");
-            sb.AppendLine($"## Packet Structure");
-            sb.AppendLine("Type | Name | Summary");
-            sb.AppendLine("--- | --- | ---");
-
-            foreach (var property in type.GetProperties())
-                sb.AppendLine(PropertyToText(property, sb, xml));
-
-            using (var sw = new StreamWriter($"{serverPath}/{className}.md"))
-                sw.Write(sb.ToString());
+            return classSummary;
         }
 
-        private static string PropertyToText(PropertyInfo property, StringBuilder sb, XmlDocument xml)
+        private static string GetPacketTableRowText(XmlDocument xml, Type packet)
+        {
+            return $"| [{packet.Name}](#{packet.Name.ToLower().Replace(' ', '-')}) | {GetClassSummary(xml, packet)} |";
+        }
+
+        private static string GetPacketDocumentation(XmlDocument xml, Type packet, string template)
+        {
+            var doc = template.Replace("{PacketName}", $"{packet.Name}");
+            doc = doc.Replace("{Description}", GetClassSummary(xml, packet));
+
+            var tempProperties = new StringBuilder();
+            foreach (var property in packet.GetProperties())
+                tempProperties.AppendLine(GetPacketPropertyTableRowText(xml, property));
+
+            doc = doc.Replace("{PacketProperties}", tempProperties.ToString());
+
+            return doc;
+        }
+
+        private static string GetPacketPropertyTableRowText(XmlDocument xml, PropertyInfo property)
         {
             // Get summary
             var propertySummary = xml["doc"]["members"].SelectSingleNode("member[@name='P:" + $"{property.DeclaringType.FullName}.{property.Name}" + "']")?.SelectSingleNode("summary").InnerText.Trim();
             if (propertySummary is null)
                 propertySummary = "(Empty)";
-            return $"{GetPropertyBaseTypeString(property.PropertyType)} | {property.Name} | {propertySummary}";
+            return $"| {GetPropertyBaseTypeString(property.PropertyType)} | {property.Name} | {propertySummary} |";
         }
 
         private static string GetPropertyBaseTypeString(Type propertyType)

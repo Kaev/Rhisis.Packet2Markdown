@@ -1,0 +1,10 @@
+﻿
+## {PacketName}
+
+{Description}
+
+### Structure
+
+| Type | Name | Description |
+| ---- | ---- | ----------- |
+{PacketProperties}
